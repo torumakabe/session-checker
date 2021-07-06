@@ -61,7 +61,11 @@ func main() {
 		}
 		session.Set("count", count)
 		session.Save()
-		c.JSON(200, gin.H{"count": count})
+		hostname, _ := os.Hostname()
+		c.JSON(200, gin.H{
+			"count":    count,
+			"hostname": hostname,
+		})
 	})
 
 	srv := &http.Server{
