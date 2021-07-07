@@ -17,10 +17,15 @@ import (
 	"github.com/spf13/viper"
 )
 
-var redisServer string
+var (
+	redisServer   string
+	redisPassword string
+)
 
 func main() {
 	flag.StringVarP(&redisServer, "redis-server", "r", "", "set redis server hostname:port when you use")
+	flag.StringVarP(&redisPassword, "redis-password", "p", "", "set redis password when you use")
+
 	flag.Parse()
 	viper.BindPFlags(flag.CommandLine)
 	viper.SetEnvPrefix("SESSION_CHECKER")
@@ -34,7 +39,7 @@ func main() {
 
 	if viper.GetString("redis-server") != "" {
 		log.Printf("using redis for session store. server: %s\n", viper.GetString("redis-server"))
-		store, err := redis.NewStore(10, "tcp", viper.GetString("redis-server"), "", []byte("secret"))
+		store, err := redis.NewStore(10, "tcp", viper.GetString("redis-server"), viper.GetString("redis-password"), []byte("secret"))
 		if err != nil {
 			log.Fatalf("Unable to connect to redis: %s\n", err)
 		}
