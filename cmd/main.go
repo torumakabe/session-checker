@@ -73,6 +73,18 @@ func main() {
 		})
 	})
 
+	r.GET("/healthz", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "OK",
+		})
+	})
+
+	r.GET("/readyz", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "OK",
+		})
+	})
+
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: r,
