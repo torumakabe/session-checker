@@ -1,9 +1,5 @@
 # Simple HTTP session checker
 
-## Table of Contents
-
-- [About](#about)
-
 ## About <a name = "about"></a>
 
 Simple HTTP session (cookie, redis) checker. By GET /incr, you will get the following response.
