@@ -38,6 +38,7 @@ jobs:
         run: docker build . -t ghcr.io/${{ secrets.REGISTRY_USERNAME }}/${{ steps.prep.outputs.repo_name }}:${{ steps.prep.outputs.tag }}
 
       - name: "Scan"
+        uses: Azure/container-scan@v0
         with:
           image-name: ghcr.io/${{ secrets.REGISTRY_USERNAME }}/${{ steps.prep.outputs.repo_name }}:${{ steps.prep.outputs.tag }}
 
