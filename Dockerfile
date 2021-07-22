@@ -14,10 +14,15 @@ RUN go mod download
 COPY . .
 
 RUN go build -o session-checker ./cmd/main.go
+RUN useradd -u 10001 app
+
 
 FROM scratch
 
 COPY --from=builder /build/session-checker /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=builder /etc/passwd /etc/passwd
+
+USER app
 
 CMD ["/session-checker"]
