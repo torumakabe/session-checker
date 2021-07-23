@@ -12,7 +12,6 @@ builds:
       - -X github.com/ToruMakabe/sessin-checker/cmd.Version={{.Version}}
     goos:
       - linux
-      - windows
       - darwin
     goarch:
       - amd64
@@ -22,9 +21,5 @@ archives:
     replacements:
       darwin: Darwin
       linux: Linux
-      windows: Windows
       amd64: x86_64
-    format_overrides:
-      - goos: windows
-        format: zip
 dist: ./build
