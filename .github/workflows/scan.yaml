@@ -1,4 +1,4 @@
-name: "Scan Container"
+name: "Scan"
 
 on:
   push:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   scan:
-    name: "Scan Container"
+    name: "Scan"
     runs-on: ubuntu-20.04
     environment: dev
 
