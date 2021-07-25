@@ -45,3 +45,6 @@ jobs:
       - name: "Test build"
         working-directory: ./cmd
         run: go build
+
+      - name: "Go test"
+        run: make test
