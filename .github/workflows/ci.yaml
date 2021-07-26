@@ -50,7 +50,7 @@ jobs:
         run: make test-short
 
   integration_test:
-    name: "integration Test"
+    name: "Integration Test"
     needs: [ go_test ]
     runs-on: ubuntu-latest
 
@@ -58,5 +58,5 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v2
 
-      - name: "integration Test with Redis"
+      - name: "Integration Test with Redis"
         run: make test
