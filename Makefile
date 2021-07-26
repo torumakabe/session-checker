@@ -4,9 +4,14 @@ APP=session-checker
 clean:
 	rm -rf ./bin
 
+.PHONY: test-short
+test-short:
+	go test -v -short ./...
+
 .PHONY: test
 test:
-	go test -v -short ./...
+	docker compose up -d
+	docker exec session-checker bash -c "cd /test && go test -v ./..."
 
 .PHONY: build
 build: clean

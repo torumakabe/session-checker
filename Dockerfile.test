@@ -1,0 +1,18 @@
+FROM golang:1.16-buster
+
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux
+
+WORKDIR /test
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+COPY . .
+
+RUN make build
+RUN mv /test/bin/session-checker /
+
+CMD ["/session-checker"]

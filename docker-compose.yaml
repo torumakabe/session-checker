@@ -2,7 +2,9 @@ version: '3'
 services:
   checker:
     container_name: session-checker
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
     depends_on:
         - redis
     ports:

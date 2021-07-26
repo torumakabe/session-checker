@@ -47,4 +47,16 @@ jobs:
         run: go build
 
       - name: "Go test"
+        run: make test-short
+
+  integration_test:
+    name: "integration Test"
+    needs: [ go_test ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "integration Test with Redis"
         run: make test
