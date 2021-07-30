@@ -25,4 +25,11 @@ archives:
     files:
     - CREDITS
     - LICENSE
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^typo:'
 dist: ./build
