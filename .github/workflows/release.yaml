@@ -64,6 +64,8 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ghcr.io/${{ secrets.REGISTRY_USERNAME }}/${{ steps.prep.outputs.repo_name }}:${{ steps.prep.outputs.tag }}
           labels: |
