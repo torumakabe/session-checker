@@ -1,4 +1,4 @@
-FROM golang:1.17-bullseye AS builder
+FROM golang:1.18-bullseye AS builder
 
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
