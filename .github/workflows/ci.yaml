@@ -9,6 +9,10 @@ on:
     paths-ignore:
       - "README.md"
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
     paths-ignore:
       - "README.md"
   workflow_dispatch:
