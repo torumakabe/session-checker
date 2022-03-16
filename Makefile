@@ -10,7 +10,7 @@ test-short:
 
 .PHONY: test
 test:
-	docker-compose up -d
+	docker compose up -d
 	docker exec session-checker bash -c "cd /test && go test -v ./..."
 
 .PHONY: build
