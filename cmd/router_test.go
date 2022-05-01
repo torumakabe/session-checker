@@ -12,8 +12,8 @@ import (
 )
 
 type JsonResponse struct {
-	Count    int    `json:"count"`
 	Hostname string `json:"hostname"`
+	Count    int    `json:"count"`
 }
 
 func TestRoot(t *testing.T) {
