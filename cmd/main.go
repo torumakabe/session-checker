@@ -24,7 +24,10 @@ func main() {
 	flag.StringVarP(&redisPassword, "redis-password", "p", "", "set redis password when you use")
 
 	flag.Parse()
-	viper.BindPFlags(flag.CommandLine)
+	err := viper.BindPFlags(flag.CommandLine)
+	if err != nil {
+		log.Fatalf("flag parse error: %s", err)
+	}
 	viper.SetEnvPrefix("SESSION_CHECKER")
 	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
 	viper.AutomaticEnv()
@@ -44,7 +47,10 @@ func main() {
 		log.Println("got signal. shutting down...")
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		srv.Shutdown(ctx)
+		err := srv.Shutdown(ctx)
+		if err != nil {
+			log.Fatalf("server shutdown error: %s", err)
+		}
 	}()
 	log.Printf("start receiving at %s\n", srv.Addr)
 	log.Fatal(srv.ListenAndServe())

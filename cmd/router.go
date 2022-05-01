@@ -42,7 +42,10 @@ func setupRouter(s, p string) *gin.Engine {
 			count++
 		}
 		session.Set("count", count)
-		session.Save()
+		err := session.Save()
+		if err != nil {
+			log.Panicf("session save error: %s", err)
+		}
 		hostname, _ := os.Hostname()
 		c.JSON(200, gin.H{
 			"count":    count,

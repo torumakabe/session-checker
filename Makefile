@@ -1,4 +1,8 @@
-APP=session-checker
+APP := session-checker
+GO_ENV := CGO_ENABLED=0
+GO_BUILD_FLAGS := \
+	-ldflags '-s -w' \
+	-trimpath
 
 .PHONY: clean
 clean:
@@ -15,7 +19,7 @@ test:
 
 .PHONY: build
 build: clean
-	go build -o ./bin/${APP} ./cmd/*
+	${GO_ENV} go build ${GO_BUILD_FLAGS} -o ./bin/${APP} ./cmd/*
 
 .PHONY: release-test
 release-test:
