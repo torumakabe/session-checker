@@ -43,19 +43,17 @@ func TestCookie(t *testing.T) {
 	client := &http.Client{Jar: jar}
 
 	for i := 0; i < 3; i++ {
-		func() {
-			resp, err := client.Get(testSrv.URL + "/incr")
-			assert.NoError(t, err)
-			defer resp.Body.Close()
+		resp, err := client.Get(testSrv.URL + "/incr")
+		assert.NoError(t, err)
+		defer resp.Body.Close()
 
-			assert.Equal(t, http.StatusOK, resp.StatusCode)
+		assert.Equal(t, http.StatusOK, resp.StatusCode)
 
-			var j JsonResponse
-			decoder := json.NewDecoder(resp.Body)
-			err = decoder.Decode(&j)
-			assert.NoError(t, err)
-			assert.Equal(t, i, j.Count)
-		}()
+		var j JsonResponse
+		decoder := json.NewDecoder(resp.Body)
+		err = decoder.Decode(&j)
+		assert.NoError(t, err)
+		assert.Equal(t, i, j.Count)
 	}
 }
 
@@ -73,18 +71,16 @@ func TestRedis(t *testing.T) {
 	client := &http.Client{Jar: jar}
 
 	for i := 0; i < 3; i++ {
-		func() {
-			resp, err := client.Get(testSrv.URL + "/incr")
-			assert.NoError(t, err)
-			defer resp.Body.Close()
+		resp, err := client.Get(testSrv.URL + "/incr")
+		assert.NoError(t, err)
+		defer resp.Body.Close()
 
-			assert.Equal(t, http.StatusOK, resp.StatusCode)
+		assert.Equal(t, http.StatusOK, resp.StatusCode)
 
-			var j JsonResponse
-			decoder := json.NewDecoder(resp.Body)
-			err = decoder.Decode(&j)
-			assert.NoError(t, err)
-			assert.Equal(t, i, j.Count)
-		}()
+		var j JsonResponse
+		decoder := json.NewDecoder(resp.Body)
+		err = decoder.Decode(&j)
+		assert.NoError(t, err)
+		assert.Equal(t, i, j.Count)
 	}
 }
