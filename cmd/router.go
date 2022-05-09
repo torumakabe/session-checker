@@ -41,26 +41,31 @@ func setupRouter(s, p string) *gin.Engine {
 			count = v.(int)
 			count++
 		}
+
 		session.Set("count", count)
 		err := session.Save()
 		if err != nil {
-			log.Panicf("session save error: %s", err)
+			log.Printf("session save error: %s\n", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"Error": "Failed to save session",
+			})
 		}
+
 		hostname, _ := os.Hostname()
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"count":    count,
 			"hostname": hostname,
 		})
 	})
 
 	r.GET("/healthz", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"status": "OK",
 		})
 	})
 
 	r.GET("/readyz", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"status": "OK",
 		})
 	})
