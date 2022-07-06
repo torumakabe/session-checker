@@ -25,6 +25,9 @@ jobs:
     name: "Scan"
     runs-on: ubuntu-22.04
     environment: dev
+    env:
+      # See https://github.com/goodwithtech/dockle/issues/188
+      DOCKLE_HOST: "unix:///var/run/docker.sock"
 
     steps:
       - name: "Checkout"
