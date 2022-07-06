@@ -17,13 +17,16 @@ on:
       - "README.md"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   go_test:
     name: "Go Test"
     strategy:
       matrix:
         go-version: [1.18.x]
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-22.04, macos-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -58,7 +61,7 @@ jobs:
   integration_test:
     name: "Integration Test"
     needs: [ go_test ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: "Checkout"
