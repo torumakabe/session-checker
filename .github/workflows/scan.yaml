@@ -17,10 +17,13 @@ on:
       - "README.md"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   scan:
     name: "Scan"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment: dev
 
     steps:
