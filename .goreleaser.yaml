@@ -12,14 +12,12 @@ builds:
       - -X github.com/ToruMakabe/sessin-checker/cmd.Version={{.Version}}
     goos:
       - linux
-      - darwin
     goarch:
       - amd64
       - arm64
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     replacements:
-      darwin: Darwin
       linux: Linux
       amd64: x86_64
     files:
