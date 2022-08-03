@@ -18,7 +18,7 @@ test-short:
 .PHONY: test
 test:
 	docker compose up -d
-	docker exec session-checker bash -c "cd /test && go test -v ./..."
+	docker exec session-checker bash -c "cd /test && go test -v -count=1 ./..."
 
 .PHONY: build
 build: clean
