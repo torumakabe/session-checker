@@ -1,8 +1,11 @@
+SHELL = /bin/bash
 APP := session-checker
 GO_ENV := CGO_ENABLED=0
 GO_BUILD_FLAGS := \
 	-ldflags '-s -w' \
 	-trimpath
+IMAGE_NAME ?= session-checker
+IMAGE_TAG ?= local
 
 .PHONY: clean
 clean:
@@ -15,7 +18,7 @@ test-short:
 .PHONY: test
 test:
 	docker compose up -d
-	docker exec session-checker bash -c "cd /test && go test -v ./..."
+	docker exec session-checker bash -c "cd /test && GOCACHE=/tmp go test -v ./..."
 
 .PHONY: build
 build: clean
@@ -24,3 +27,11 @@ build: clean
 .PHONY: release-test
 release-test:
 	goreleaser --snapshot --skip-publish --rm-dist
+
+.PHONY: docker-build
+docker-build:
+	docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+
+.PHONY: docker-image-scan
+docker-image-scan: docker-build
+	trivy image ${IMAGE_NAME}:${IMAGE_TAG}
