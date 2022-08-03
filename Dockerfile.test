@@ -4,6 +4,8 @@ ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux
 
+RUN useradd -u 10001 app
+USER app
 WORKDIR /test
 
 COPY go.mod .
