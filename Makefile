@@ -11,6 +11,10 @@ IMAGE_TAG ?= local
 clean:
 	rm -rf ./bin
 
+.PHONY: lint
+lint:
+	golangci-lint run ./...
+
 .PHONY: test-short
 test-short:
 	go test -v -short ./...
