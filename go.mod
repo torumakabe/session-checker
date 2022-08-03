@@ -1,6 +1,6 @@
 module github.com/ToruMakabe/session-checker
 
-go 1.19
+go 1.18
 
 require (
 	github.com/gin-contrib/sessions v0.0.5
