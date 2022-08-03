@@ -20,22 +20,40 @@ jobs:
       - name: "Prepare"
         id: prep
         run: |
-          if [[ ${{ github.event_name }} == 'workflow_dispatch' ]]; then
+          if [[ ${{ github.event_name }} == 'pull_request' || ${{ github.event_name }} == 'workflow_dispatch' ]]; then
             TAG=test
           else
             TAG=$(echo ${GITHUB_REF} | awk -F '/' '{print $3}')
           fi
+          REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
           REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          echo ::set-output name=repo_owner::${REPO_OWNER}
           echo ::set-output name=tag::${TAG}
           echo ::set-output name=repo_name::${REPO_NAME}
+
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Build container for scan"
+        working-directory: ./
+        run: docker build -t ghcr.io/${{ steps.prep.outputs.repo_name }}:scan-tmp .
+
+      - name: "Scan container"
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ghcr.io/${{ steps.prep.outputs.repo_name }}:scan-tmp'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          trivyignores: '.github/workflows/trivy/.trivyignore'
 
       - name: "Go Setup"
         uses: actions/setup-go@v3
         with:
-          go-version: 1.18.x
-
-      - name: "Checkout"
-        uses: actions/checkout@v3
+          go-version: 1.18
+          check-latest: true
 
       - name: "GoReleaser"
         uses: goreleaser/goreleaser-action@v3
@@ -58,8 +76,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PAT }}
+          username: ${{ steps.prep.outputs.repo_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Build & Publish"
         uses: docker/build-push-action@v3
@@ -72,7 +90,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
-            ghcr.io/${{ secrets.REGISTRY_USERNAME }}/${{ steps.prep.outputs.repo_name }}:${{ steps.prep.outputs.tag }}
+            ghcr.io/${{ steps.prep.outputs.repo_owner }}/${{ steps.prep.outputs.repo_name }}:${{ steps.prep.outputs.tag }}
           labels: |
             org.opencontainers.image.title=${{ github.event.repository.name }}
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
