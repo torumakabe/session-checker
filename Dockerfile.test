@@ -5,7 +5,6 @@ ENV GO111MODULE=on \
     GOOS=linux
 
 RUN useradd -u 10001 app
-USER app
 WORKDIR /test
 
 COPY go.mod .
@@ -17,4 +16,5 @@ COPY . .
 RUN make build
 RUN mv /test/bin/session-checker /
 
+USER app
 CMD ["/session-checker"]
