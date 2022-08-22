@@ -49,6 +49,10 @@ jobs:
           severity: 'CRITICAL,HIGH'
           trivyignores: '.github/workflows/trivy/.trivyignore'
 
+      - name: "Cleanup after scan"
+        working-directory: ./
+        run: rm ./trivyignores
+
       - name: "Go Setup"
         uses: actions/setup-go@v3
         with:
