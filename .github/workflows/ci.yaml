@@ -36,6 +36,12 @@ jobs:
           go-version: ${{ matrix.go-version }}
           check-latest: true
 
+      - name: "Prepare"
+        id: prep
+        run: |
+          GOROOT=$(go env GOROOT)
+          echo ::set-output name=GOROOT::${GOROOT}
+
       - name: "Checkout"
         uses: actions/checkout@v3
 
@@ -51,6 +57,8 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: latest
+        env:
+          GOROOT: ${{ steps.prep.outputs.GOROOT }}
 
       - name: "Test build"
         working-directory: ./cmd
