@@ -1,4 +1,4 @@
-module github.com/ToruMakabe/session-checker
+module github.com/torumakabe/session-checker
 
 go 1.19
 
