@@ -27,9 +27,9 @@ jobs:
           fi
           REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
           REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
-          echo ::set-output name=repo_owner::${REPO_OWNER}
-          echo ::set-output name=tag::${TAG}
-          echo ::set-output name=repo_name::${REPO_NAME}
+          echo "repo_owner=${REPO_OWNER}" >> $GITHUB_OUTPUT
+          echo "tag=${TAG}"  >> $GITHUB_OUTPUT
+          echo "repo_name=${REPO_NAME}"  >> $GITHUB_OUTPUT
 
       - name: "Checkout"
         uses: actions/checkout@v3

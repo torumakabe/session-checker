@@ -40,7 +40,7 @@ jobs:
         id: prep
         run: |
           GOROOT=$(go env GOROOT)
-          echo ::set-output name=GOROOT::${GOROOT}
+          echo "GOROOT=${GOROOT}" >> $GITHUB_OUTPUT
 
       - name: "Checkout"
         uses: actions/checkout@v3
