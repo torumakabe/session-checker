@@ -3,5 +3,10 @@
     "go.lintFlags": [
         "--fast",
         "--config=${workspaceFolder}/.golangci.yaml"
-    ]
+    ],
+    "yaml.schemas": {
+        "kubernetes": "*.yaml",
+        "file:///home/tomakabe/.vscode-server/extensions/docsmsft.docs-yaml-0.2.9/out/yaml-support/toc.schema.json": "/toc\\.yml/i",
+        "https://json.schemastore.org/github-action.json": "file:///home/tomakabe/workspace/github.com/torumakabe/session-checker/.github/workflows/release.yaml"
+    }
 }

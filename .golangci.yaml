@@ -1,7 +1,6 @@
 linters:
   disable-all: true
   enable:
-    - deadcode
     - errcheck
     - errorlint
     - wrapcheck
@@ -9,17 +8,9 @@ linters:
     - govet
     - ineffassign
     - staticcheck
-    - structcheck
     - typecheck
-    - varcheck
     - bodyclose
 
 linters-settings:
   govet:
     check-shadowing: false
-
-issues:
-  exclude-rules:
-    - path: version\.go
-      linters:
-        - deadcode
