@@ -1,7 +1,6 @@
 linters:
   disable-all: true
   enable:
-    - deadcode
     - errcheck
     - errorlint
     - wrapcheck
@@ -9,9 +8,7 @@ linters:
     - govet
     - ineffassign
     - staticcheck
-    - structcheck
     - typecheck
-    - varcheck
     - bodyclose
 
 linters-settings:
