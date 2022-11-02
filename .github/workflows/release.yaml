@@ -55,10 +55,9 @@ jobs:
 
       - name: "Go Setup"
         uses: actions/setup-go@v3
-        working-directory: ./
         with:
           go-version-file: ./go.mod
-          check-latest: true
+          cache: true
 
       - name: "GoReleaser"
         uses: goreleaser/goreleaser-action@v3
