@@ -29,12 +29,6 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: "Prepare"
-        id: prep
-        run: |
-          GOROOT=$(go env GOROOT)
-          echo "GOROOT=${GOROOT}" >> $GITHUB_OUTPUT
-
       - name: "Checkout"
         uses: actions/checkout@v3
 
@@ -43,6 +37,12 @@ jobs:
         with:
           go-version-file: ./go.mod
           cache: true
+
+      - name: "Prepare"
+        id: prep
+        run: |
+          GOROOT=$(go env GOROOT)
+          echo "GOROOT=${GOROOT}" >> $GITHUB_OUTPUT
 
       - name: "Lint"
         uses: golangci/golangci-lint-action@v3
