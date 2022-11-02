@@ -29,12 +29,6 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: "Go Setup"
-        uses: actions/setup-go@v3
-        with:
-          go-version-file: ./go.mod
-          cache: true
-
       - name: "Prepare"
         id: prep
         run: |
@@ -43,6 +37,12 @@ jobs:
 
       - name: "Checkout"
         uses: actions/checkout@v3
+
+      - name: "Go Setup"
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: ./go.mod
+          cache: true
 
       - name: "Lint"
         uses: golangci/golangci-lint-action@v3
