@@ -31,8 +31,9 @@ jobs:
     steps:
       - name: "Go Setup"
         uses: actions/setup-go@v3
+        working-directory: ./
         with:
-          go-version-file: "./go.mod"
+          go-version-file: ./go.mod
           check-latest: true
 
       - name: "Prepare"
