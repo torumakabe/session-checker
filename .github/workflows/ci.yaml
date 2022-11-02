@@ -32,7 +32,7 @@ jobs:
       - name: "Go Setup"
         uses: actions/setup-go@v3
         with:
-          go-version-file: "go.mod"
+          go-version-file: "./go.mod"
           check-latest: true
 
       - name: "Prepare"
