@@ -1,6 +1,5 @@
 SHELL = /bin/bash
 APP := session-checker
-GO_ENV := CGO_ENABLED=0
 GO_BUILD_FLAGS := \
 	-ldflags '-s -w' \
 	-trimpath
