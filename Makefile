@@ -21,6 +21,7 @@ test-short:
 
 .PHONY: test
 test:
+	docker compose build --no-cache
 	docker compose up -d
 	docker exec session-checker bash -c "cd /test && GOCACHE=/tmp go test -v ./..."
 

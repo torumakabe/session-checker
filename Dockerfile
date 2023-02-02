@@ -1,8 +1,6 @@
-FROM golang:1.19-bullseye AS builder
+FROM golang:1.20-bullseye AS builder
 
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux
+ENV GOOS=linux
 
 WORKDIR /build
 
