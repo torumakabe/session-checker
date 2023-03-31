@@ -13,6 +13,7 @@ import (
 
 func setupRouter(s, p string) *gin.Engine {
 	r := gin.Default()
+	hostname, _ := os.Hostname()
 
 	if s != "" {
 		log.Printf("using redis for session store. server: %s\n", s)
@@ -51,7 +52,6 @@ func setupRouter(s, p string) *gin.Engine {
 			})
 		}
 
-		hostname, _ := os.Hostname()
 		c.JSON(http.StatusOK, gin.H{
 			"count":    count,
 			"hostname": hostname,
@@ -60,13 +60,15 @@ func setupRouter(s, p string) *gin.Engine {
 
 	r.GET("/healthz", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"status": "OK",
+			"status":   "OK",
+			"hostname": hostname,
 		})
 	})
 
 	r.GET("/readyz", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"status": "OK",
+			"status":   "OK",
+			"hostname": hostname,
 		})
 	})
 
