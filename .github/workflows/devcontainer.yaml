@@ -35,7 +35,6 @@ jobs:
           BUILDX_NO_DEFAULT_ATTESTATIONS: true
         with:
           imageName: ghcr.io/torumakabe/session-chekcer-devcontainer
-#         cacheFrom: ghcr.io/torumakabe/session-chekcer-devcontainer
-          noCache: true
+          cacheFrom: ghcr.io/torumakabe/session-chekcer-devcontainer
           platform: linux/amd64,linux/arm64
           push: always
