@@ -2,12 +2,14 @@ name: 'Build devcontainer'
 on:
   pull_request:
     paths:
-      - '.devcontainer/**'
+      - ".devcontainer/**"
+      - ".github/.devcontainer/**"
   push:
     branches:
       - main
     paths:
-      - '.devcontainer/**'
+      - ".devcontainer/**"
+      - ".github/.devcontainer/**"
 
 jobs:
   build:
@@ -38,3 +40,4 @@ jobs:
           cacheFrom: ghcr.io/torumakabe/session-chekcer-devcontainer
           platform: linux/amd64,linux/arm64
           push: always
+          subFolder: .github

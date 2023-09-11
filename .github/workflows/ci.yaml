@@ -9,6 +9,7 @@ on:
     paths-ignore:
       - "README.md"
       - ".devcontainer/**"
+      - ".github/**"
   pull_request:
     types:
       - opened
@@ -17,6 +18,7 @@ on:
     paths-ignore:
       - "README.md"
       - ".devcontainer/**"
+      - ".github/**"
   workflow_dispatch:
 
 permissions:
