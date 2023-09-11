@@ -14,9 +14,15 @@ name: "CodeQL"
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - "README.md"
+      - ".devcontainer/**"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
+    paths-ignore:
+      - "README.md"
+      - ".devcontainer/**"
   schedule:
     - cron: '44 20 * * 2'
 
@@ -51,7 +57,6 @@ jobs:
 
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
-
 
     # Fix build error https://github.com/github/codeql-action/issues/1842
     - name: Install Go
