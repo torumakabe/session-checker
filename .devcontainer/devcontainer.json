@@ -7,9 +7,9 @@
 	"features": {
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers/features/go:1": {},
-		"ghcr.io/guiyomh/features/goreleaser:0": {},
-		//	"ghcr.io/devcontainers-contrib/features/trivy:1": {} #TODO: alternative way
+		"ghcr.io/devcontainers/features/go:1": {}
+		// "ghcr.io/guiyomh/features/goreleaser:0": {}, #Bug(arm64): https://github.com/guiyomh/features/issues/35
+		// "ghcr.io/devcontainers-contrib/features/trivy:1": {} # Unsuppot(arm64)
 	},
 	"customizations": {
 		"vscode": {
