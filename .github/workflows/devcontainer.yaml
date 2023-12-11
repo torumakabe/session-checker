@@ -10,6 +10,7 @@ on:
     paths:
       - ".devcontainer/**"
       - ".github/.devcontainer/**"
+  workflow_dispatch:
 
 jobs:
   build:
