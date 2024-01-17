@@ -2,7 +2,9 @@
 	"name": "session-checker Dev Container",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "ghcr.io/torumakabe/session-chekcer-devcontainer:latest",
-	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/trivy:1": {}
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -11,8 +13,6 @@
 			]
 		}
 	}
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
