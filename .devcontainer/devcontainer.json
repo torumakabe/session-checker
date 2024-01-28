@@ -3,7 +3,8 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "ghcr.io/torumakabe/session-chekcer-devcontainer:latest",
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/trivy:1": {}
+		// "ghcr.io/devcontainers-contrib/features/trivy:1": {}
+		"ghcr.io/devcontainers/features/sshd:1": {}
 	},
 	"customizations": {
 		"vscode": {
