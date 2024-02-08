@@ -31,7 +31,7 @@ build: clean
 
 .PHONY: release-test
 release-test:
-	goreleaser --snapshot --skip-publish --clean
+	goreleaser --snapshot --skip=publish --clean
 
 .PHONY: docker-build
 docker-build:

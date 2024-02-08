@@ -10,10 +10,12 @@
 		"vscode": {
 			"extensions": [
 				"ms-vscode.makefile-tools",
-				"mutantdino.resourcemonitor"
+				"mutantdino.resourcemonitor",
+				"aquasecurityofficial.trivy-vulnerability-scanner"
 			]
 		}
-	}
+	},
+	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
