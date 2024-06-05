@@ -1,4 +1,3 @@
-version: '3'
 services:
   checker:
     container_name: session-checker
@@ -6,13 +5,13 @@ services:
       context: .
       dockerfile: ./Dockerfile.test
     depends_on:
-        - redis
+      - redis
     ports:
-     - "8080:8080"
+      - "8080:8080"
     command: /session-checker --redis-server redis:6379
   redis:
     container_name: redis
     image: redis:latest
     ports:
-        - "6379:6379"
+      - "6379:6379"
     command: redis-server
