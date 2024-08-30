@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"golang.org/x/net/publicsuffix"
 )
 
 type JsonResponse struct {
@@ -38,7 +39,7 @@ func TestCookie(t *testing.T) {
 	testSrv := httptest.NewServer(r)
 	defer testSrv.Close()
 
-	jar, err := cookiejar.New(nil)
+	jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
 	assert.NoError(t, err)
 	client := &http.Client{Jar: jar}
 
@@ -66,7 +67,7 @@ func TestRedis(t *testing.T) {
 	testSrv := httptest.NewServer(r)
 	defer testSrv.Close()
 
-	jar, err := cookiejar.New(nil)
+	jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
 	assert.NoError(t, err)
 	client := &http.Client{Jar: jar}
 
