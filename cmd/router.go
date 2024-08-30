@@ -27,7 +27,6 @@ func setupRouter(s, p string) *gin.Engine {
 		store := cookie.NewStore([]byte("secret"))
 		sopt := sessions.Options{
 			SameSite: http.SameSiteLaxMode,
-			Secure:   false,
 		}
 		store.Options(sopt)
 		r.Use(sessions.Sessions("mysession", store))
