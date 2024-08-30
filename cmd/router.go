@@ -17,6 +17,7 @@ func setupRouter(s, p string) *gin.Engine {
 
 	sopt := sessions.Options{
 		SameSite: http.SameSiteLaxMode,
+		Secure:   false,
 	}
 
 	if s != "" {
