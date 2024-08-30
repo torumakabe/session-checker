@@ -15,22 +15,20 @@ func setupRouter(s, p string) *gin.Engine {
 	r := gin.Default()
 	hostname, _ := os.Hostname()
 
-	sopt := sessions.Options{
-		SameSite: http.SameSiteLaxMode,
-		Secure:   false,
-	}
-
 	if s != "" {
 		log.Printf("using redis for session store. server: %s\n", s)
 		store, err := redis.NewStore(10, "tcp", s, p, []byte("secret"))
 		if err != nil {
 			log.Fatalf("Unable to connect to redis: %s\n", err)
 		}
-		store.Options(sopt)
 		r.Use(sessions.Sessions("mysession", store))
 	} else {
 		log.Println("using cookie for session store.")
 		store := cookie.NewStore([]byte("secret"))
+		sopt := sessions.Options{
+			SameSite: http.SameSiteLaxMode,
+			Secure:   false,
+		}
 		store.Options(sopt)
 		r.Use(sessions.Sessions("mysession", store))
 	}
