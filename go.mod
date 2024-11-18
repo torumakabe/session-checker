@@ -2,7 +2,7 @@ module github.com/torumakabe/session-checker
 
 go 1.23
 
-toolchain go1.23.1
+toolchain go1.23.3
 
 require (
 	github.com/gin-contrib/sessions v1.0.1
