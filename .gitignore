@@ -26,3 +26,5 @@
 
 bin/
 build/
+
+.cache/
