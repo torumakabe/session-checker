@@ -25,6 +25,9 @@ func setupRouter(s, p string) *gin.Engine {
 	} else {
 		log.Println("using cookie for session store.")
 		store := cookie.NewStore([]byte("secret"))
+		store.Options(sessions.Options{
+			SameSite: http.SameSiteStrictMode,
+		})
 		r.Use(sessions.Sessions("mysession", store))
 	}
 
