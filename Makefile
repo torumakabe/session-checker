@@ -27,7 +27,7 @@ test:
 
 .PHONY: build
 build: clean
-	${GO_ENV} go build ${GO_BUILD_FLAGS} -o ./bin/${APP} ./cmd/*
+	$(GO_ENV) go build $(GO_BUILD_FLAGS) -o ./bin/$(APP) ./cmd
 
 .PHONY: release-test
 release-test:
@@ -35,8 +35,8 @@ release-test:
 
 .PHONY: docker-build
 docker-build:
-	docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
 
 .PHONY: docker-image-scan
 docker-image-scan: docker-build
-	trivy image ${IMAGE_NAME}:${IMAGE_TAG}
+	trivy image $(IMAGE_NAME):$(IMAGE_TAG)
