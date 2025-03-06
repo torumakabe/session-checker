@@ -5,7 +5,8 @@ services:
       context: .
       dockerfile: ./Dockerfile.test
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     ports:
       - "8080:8080"
     command: /session-checker --redis-server redis:6379
@@ -15,3 +16,8 @@ services:
     ports:
       - "6379:6379"
     command: redis-server
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
