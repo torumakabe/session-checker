@@ -1,4 +1,4 @@
-package main
+package router
 
 import (
 	"log"
@@ -11,7 +11,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func setupRouter(s, p string) *gin.Engine {
+// SetupRouter initializes the Gin router with session management and routes.
+// It supports both Redis and cookie-based session stores.
+//
+// Parameters:
+//   - s: Redis server address (hostname:port). If empty, cookie-based session store is used.
+//   - p: Redis password.
+//
+// Returns:
+//   - *gin.Engine: The initialized Gin router.
+func SetupRouter(s, p string) *gin.Engine {
 	r := gin.Default()
 	hostname, _ := os.Hostname()
 

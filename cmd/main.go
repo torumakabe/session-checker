@@ -10,8 +10,9 @@ import (
 	"syscall"
 	"time"
 
-	flag "github.com/spf13/pflag"
+	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
+	"github.com/torumakabe/session-checker/router"
 )
 
 var (
@@ -20,11 +21,11 @@ var (
 )
 
 func main() {
-	flag.StringVarP(&redisServer, "redis-server", "r", "", "set redis server hostname:port when you use")
-	flag.StringVarP(&redisPassword, "redis-password", "p", "", "set redis password when you use")
+	pflag.StringVarP(&redisServer, "redis-server", "r", "", "set redis server hostname:port when you use")
+	pflag.StringVarP(&redisPassword, "redis-password", "p", "", "set redis password when you use")
 
-	flag.Parse()
-	err := viper.BindPFlags(flag.CommandLine)
+	pflag.Parse()
+	err := viper.BindPFlags(pflag.CommandLine)
 	if err != nil {
 		log.Fatalf("flag parse error: %s", err)
 	}
@@ -35,7 +36,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	r := setupRouter(viper.GetString("redis-server"), viper.GetString("redis-password"))
+	r := router.SetupRouter(viper.GetString("redis-server"), viper.GetString("redis-password"))
 
 	srv := &http.Server{
 		Addr:    ":8080",
