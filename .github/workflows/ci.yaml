@@ -49,7 +49,7 @@ jobs:
           echo "GOROOT=${GOROOT}" >> $GITHUB_OUTPUT
 
       - name: "Lint"
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
           version: latest
         env:
